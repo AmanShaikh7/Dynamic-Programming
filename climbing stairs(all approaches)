@@ -1,0 +1,45 @@
+import java.util.*;
+import static java.lang.Math.ceil;
+
+class Accio {
+    public int ClimbingStairs(int n,int memo[]) {
+        // this is memo 
+		
+		// if(n<0) return 0;
+		// if(n==0) return 1;
+		// if(memo[n]>0) return memo[n];
+		// int onejump = ClimbingStairs(n-1,memo);
+		// int twojump =ClimbingStairs(n-2,memo);
+		// memo[n] =  onejump+twojump;
+		// return memo[n];
+
+		// tabulation
+		// memo[1] =1;
+		// memo[0]=1;
+		// for(int i=2;i<=n;i++){
+		// 	memo[i] = memo[i-1]+ memo[i-2];	
+		// }
+		// return memo[n];
+
+		//optimized method
+		int prev = 1;
+		int prevprev= 1;
+		int ans = 0;
+		for(int i=2;i<=n;i++){
+			ans = prev + prevprev;
+			prev = prevprev;
+			prevprev = ans;
+		}
+		return ans;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        Accio Obj = new Accio();
+		int memo[] = new int[n+1];
+        System.out.println(Obj.ClimbingStairs(n,memo));
+    }
+}
