@@ -1,0 +1,27 @@
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int[] memo = new int[target + 1];
+        Arrays.fill(memo, -1);
+        return find(nums, target, memo);
+    }
+
+    private int find(int[] nums, int target, int[] memo) {
+        if (target == 0) {
+            return 1;
+        }
+
+        if (memo[target] != -1) {
+            return memo[target];
+        }
+
+        int count = 0;
+        for (int num : nums) {
+            if (target >= num) {
+                count += find(nums, target - num, memo);
+            }
+        }
+
+        memo[target] = count;
+        return count;
+    }
+}
